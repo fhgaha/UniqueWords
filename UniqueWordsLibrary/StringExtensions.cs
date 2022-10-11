@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace UniqueWords
+namespace UniqueWordsLibrary
 {
     public static class StringExtensions
     {
