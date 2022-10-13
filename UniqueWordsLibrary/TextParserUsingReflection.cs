@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace UniqueWordsLibrary
 {
-    public class MyTextParser
+    public class TextParserUsingReflection
     {
         private IDictionary<string, int> _wordCounts;
 
@@ -22,10 +22,8 @@ namespace UniqueWordsLibrary
         {
             foreach (string word in ParseWords(line))
             {
-                if (!_wordCounts.ContainsKey(word))
-                    _wordCounts.Add(word, 0);
-
-                _wordCounts[word]++;
+                var wasAdded = _wordCounts.TryAdd(word, 1);
+                if (!wasAdded) _wordCounts[word]++;
             }
         }
 
