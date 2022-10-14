@@ -1,10 +1,22 @@
-﻿using System;
+﻿/*
+2.
+Задание по блоку Процессы и потоки:
+В dll предыдущего задания реализовать публичный метод аналогичный приватному, но с многопоточной обработкой текста.
+Сравнить время выполнения приватного и публичного методов при помощи объекта StopWach.
+Вместе с кодом прислать время выполнения методов.
+
+3.
+Итоговое задание по блоку:
+На основе публичного метода из задания "Процессы и потоки" реализовать WCF или WebAPI сервис, который на вход принимает текст, 
+возвращает Dictionary<string, int>. Вместе с кодом сервиса должен присутствовать код приложения его вызывающий.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using UniqueWordsLibrary;
 
 namespace UniqueWords
@@ -22,7 +34,6 @@ namespace UniqueWords
                 Console.WriteLine();
                 ReadAndWriteAsync(inputPath, outputPath);
                 Console.WriteLine("\n---------------------------------");
-
                 Console.ReadLine();
             }
         }
@@ -55,7 +66,7 @@ namespace UniqueWords
             Console.WriteLine("    Processing...");
             var stopwatch = Stopwatch.StartNew();
 
-            var wordCounts = new TextParserAsync().BuildDictionary(inputPath);
+            var wordCounts = new TextParserFaster().BuildDictionary(inputPath);
             Write(wordCounts, outputPath);
 
             stopwatch.Stop();
@@ -66,7 +77,7 @@ namespace UniqueWords
         {
             if (wordCounts.Count == 0)
             {
-                Console.WriteLine("wordCounts is empty", ConsoleColor.Red);
+                Console.WriteLine("wordCounts is empty");
                 return;
             }
 

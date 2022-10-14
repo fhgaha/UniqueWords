@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,22 +7,21 @@ using System.Threading.Tasks;
 
 namespace UniqueWordsLibrary
 {
-    public class TextParserAsyncThreeTimesSlower
+    public class TextParserFaster
     {
         private ConcurrentDictionary<string, int> _wordCounts =
-             new ConcurrentDictionary<string, int>(Environment.ProcessorCount * 2, 15000);
+             new ConcurrentDictionary<string, int>();
 
         public IDictionary<string, int> BuildDictionary(string inputPath)
         {
-            Parallel.ForEach(source: File.ReadLines(inputPath), body: AddWordsToDictionary);
+            Parallel.ForEach(source: File.ReadLines(inputPath, Encoding.UTF8), body: AddWordsToDictionary);
             return _wordCounts;
         }
 
         private void AddWordsToDictionary(string line)
         {
-            Parallel.ForEach(
-                source: ParseWords(line),
-                body: (word) => _wordCounts.AddOrUpdate(word, 1, (key, existingValue) => existingValue + 1));
+            foreach (var word in ParseWords(line))
+                _wordCounts.AddOrUpdate(word, 1, (key, existingValue) => existingValue + 1);
         }
 
         private IEnumerable<string> ParseWords(string line) =>

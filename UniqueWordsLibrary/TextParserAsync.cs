@@ -12,39 +12,40 @@ namespace UniqueWordsLibrary
 {
     public class TextParserAsync
     {
-        private readonly ConcurrentDictionary<string, int> _wordCounts =
-             new ConcurrentDictionary<string, int>(Environment.ProcessorCount * 2, 15000);
+        private ConcurrentDictionary<string, int> _wordCounts =
+             new ConcurrentDictionary<string, int>(Environment.ProcessorCount, 15000);
+
+        //public IDictionary<string, int> BuildDictionary(string inputPath)
+        //{
+        //    Parallel.ForEach(source: File.ReadLines(inputPath, Encoding.UTF8), body: AddWordsToDictionary);
+        //    return _wordCounts;
+        //}
+
+        //private void AddWordsToDictionary(string line)
+        //{
+        //    foreach (var word in ParseWords(line))
+        //        _wordCounts.AddOrUpdate(word, 1, (key, existingValue) => existingValue + 1);
+        //}
 
         public IDictionary<string, int> BuildDictionary(string inputPath)
         {
-            using (FileStream fs = File.OpenRead(inputPath))
-            using (BufferedStream bs = new BufferedStream(fs))
-            using (StreamReader sr = new StreamReader(bs))
-            {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    AddWordsToDictionary(line);
-                }
-            }
-
+            Parallel.ForEach(
+                source: File
+                    .ReadLines(inputPath, Encoding.UTF8)
+                    .SelectMany(line => ParseWords(line)),
+                body: word => _wordCounts.AddOrUpdate(word, 1, (key, existingValue) => existingValue + 1));
             return _wordCounts;
         }
 
         private void AddWordsToDictionary(string line)
         {
-            Parallel.ForEach(
-                source: ParseWords(line),
-                body: (word) => _wordCounts.AddOrUpdate(word, 1, (key, existingValue) => existingValue + 1));
+            foreach (var word in ParseWords(line))
+                _wordCounts.AddOrUpdate(word, 1, (key, existingValue) => existingValue + 1);
         }
 
-        private IEnumerable<string> ParseWords(string line)
-        {
-            Regex lettersOnly = new Regex(@"\W+");
-
-            return lettersOnly.Split(line)
-                .Select(word => word.ToLower())
-                .Where(word => !string.IsNullOrEmpty(word));
-        }
+        private IEnumerable<string> ParseWords(string line) =>
+           line.Split()
+               .Select(word => word.ToLower().Trim(c => !char.IsLetter(c)))
+               .Where(word => !string.IsNullOrEmpty(word));
     }
 }
