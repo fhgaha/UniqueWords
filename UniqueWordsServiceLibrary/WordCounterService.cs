@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using UniqueWordsLibrary;
 
 namespace UniqueWordsServiceLibrary
 {
@@ -64,9 +65,11 @@ namespace UniqueWordsServiceLibrary
             return result;
         }
 
-        public IDictionary<string, int> GetWordCounts(string text)
+        public IDictionary<string, int> GetWordCounts(string inputPath)
         {
-            return new Dictionary<string, int>() { ["test"] = 20000 };
+            //return new Dictionary<string, int>() { ["test"] = 20000 };
+         
+            return new TextParserMultithreading().BuildDictionary(inputPath);
         }
     }
 }

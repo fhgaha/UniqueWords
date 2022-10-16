@@ -33,10 +33,13 @@ namespace UniqueWordsClient
 {
     class Program
     {
+        private const string inputPath = @"D:\MyProjects\VS 19 projects\ConsoleApps\UniqueWords\UniqueWordsClient\WarAndPeace.txt";
+        private const string outputPath = @"D:\MyProjects\VS 19 projects\ConsoleApps\UniqueWords\UniqueWordsClient\UniqueWords.txt";
+
         static void Main(string[] args)
         {
-            var inputPath = @"../../../UniqueWordsClient/WarAndPeace.txt";
-            var outputPath = @"../../../UniqueWordsClient/UniqueWords.txt";
+            //var inputPath = @"../../../UniqueWordsClient/WarAndPeace.txt";
+            //var outputPath = @"../../../UniqueWordsClient/UniqueWords.txt";
 
             while (true)
             {
@@ -44,7 +47,7 @@ namespace UniqueWordsClient
                 Console.WriteLine();
                 ReadAndWriteUsingMultiThreading(inputPath, outputPath);
                 Console.WriteLine();
-                GetResultsFromService();
+                GetResultsFromService(inputPath);
                 Console.WriteLine("\n---------------------------------");
 
                 Console.WriteLine("Press <Enter> to read and write again.");
@@ -87,7 +90,7 @@ namespace UniqueWordsClient
             Console.WriteLine($"    Done in {stopwatch.ElapsedMilliseconds} milliseconds");
         }
 
-        private static void Write(IDictionary<string, int> wordCounts, string outputPath)
+        private static void Write(IDictionary<string, int> wordCounts, string outputPath, int amount = 0)
         {
             if (wordCounts.Count == 0)
             {
@@ -106,46 +109,23 @@ namespace UniqueWordsClient
                     pair.Value))
                 .ToArray();
 
-            File.WriteAllLines(outputPath, output);
+            File.WriteAllLines(outputPath, amount == 0 ? output : output.Take(amount));
         }
 
-        private static void GetResultsFromService()
+        private static void GetResultsFromService(string inputPath)
         {
-            //Set up dot instead of comma in numeric values
-            System.Globalization.CultureInfo customCulture =
-                (System.Globalization.CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
-            customCulture.NumberFormat.NumberDecimalSeparator = ".";
-            System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
-
-            //Step 1: Create an instance of the WCF proxy.
             WordCounterClient client = new WordCounterClient();
 
-            // Step 2: Call the service operations.
-            // Call the Add service operation.
-            double value1 = 100.00D;
-            double value2 = 15.99D;
-            double result = client.Add(value1, value2);
-            Console.WriteLine("Add({0},{1}) = {2}", value1, value2, result);
+            Console.WriteLine("Read and write using web service:");
+            Console.WriteLine("    Processing...");
+            var stopwatch = Stopwatch.StartNew();
 
-            // Call the Subtract service operation.
-            value1 = 145.00D;
-            value2 = 76.54D;
-            result = client.Subtract(value1, value2);
-            Console.WriteLine("Subtract({0},{1}) = {2}", value1, value2, result);
+            var result = client.GetWordCountsAsync(inputPath).Result;
+            Write(result, outputPath);
 
-            // Call the Multiply service operation.
-            value1 = 9.00D;
-            value2 = 81.25D;
-            result = client.Multiply(value1, value2);
-            Console.WriteLine("Multiply({0},{1}) = {2}", value1, value2, result);
+            stopwatch.Stop();
+            Console.WriteLine($"    Done in {stopwatch.ElapsedMilliseconds} milliseconds");
 
-            // Call the Divide service operation.
-            value1 = 22.00D;
-            value2 = 7.00D;
-            result = client.Divide(value1, value2);
-            Console.WriteLine("Divide({0},{1}) = {2}", value1, value2, result);
-
-            // Step 3: Close the client to gracefully close the connection and clean up resources.
             Console.WriteLine("\nPress <Enter> to terminate the client.");
             Console.ReadLine();
             client.Close();
