@@ -12,58 +12,64 @@ namespace UniqueWordsClient.ServiceReference1 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://Microsoft.ServiceModel.Samples", ConfigurationName="ServiceReference1.ICalculator")]
-    public interface ICalculator {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://Microsoft.ServiceModel.Samples", ConfigurationName="ServiceReference1.IWordCounter")]
+    public interface IWordCounter {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/ICalculator/Add", ReplyAction="http://Microsoft.ServiceModel.Samples/ICalculator/AddResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Add", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/AddResponse")]
         double Add(double n1, double n2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/ICalculator/Add", ReplyAction="http://Microsoft.ServiceModel.Samples/ICalculator/AddResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Add", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/AddResponse")]
         System.Threading.Tasks.Task<double> AddAsync(double n1, double n2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/ICalculator/Subtract", ReplyAction="http://Microsoft.ServiceModel.Samples/ICalculator/SubtractResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Subtract", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/SubtractResponse")]
         double Subtract(double n1, double n2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/ICalculator/Subtract", ReplyAction="http://Microsoft.ServiceModel.Samples/ICalculator/SubtractResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Subtract", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/SubtractResponse")]
         System.Threading.Tasks.Task<double> SubtractAsync(double n1, double n2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/ICalculator/Multiply", ReplyAction="http://Microsoft.ServiceModel.Samples/ICalculator/MultiplyResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Multiply", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/MultiplyResponse")]
         double Multiply(double n1, double n2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/ICalculator/Multiply", ReplyAction="http://Microsoft.ServiceModel.Samples/ICalculator/MultiplyResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Multiply", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/MultiplyResponse")]
         System.Threading.Tasks.Task<double> MultiplyAsync(double n1, double n2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/ICalculator/Divide", ReplyAction="http://Microsoft.ServiceModel.Samples/ICalculator/DivideResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Divide", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/DivideResponse")]
         double Divide(double n1, double n2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/ICalculator/Divide", ReplyAction="http://Microsoft.ServiceModel.Samples/ICalculator/DivideResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Divide", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/DivideResponse")]
         System.Threading.Tasks.Task<double> DivideAsync(double n1, double n2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/GetWordCounts", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/GetWordCountsResponse")]
+        System.Collections.Generic.Dictionary<string, int> GetWordCounts(string text);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IWordCounter/GetWordCounts", ReplyAction="http://Microsoft.ServiceModel.Samples/IWordCounter/GetWordCountsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetWordCountsAsync(string text);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ICalculatorChannel : UniqueWordsClient.ServiceReference1.ICalculator, System.ServiceModel.IClientChannel {
+    public interface IWordCounterChannel : UniqueWordsClient.ServiceReference1.IWordCounter, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CalculatorClient : System.ServiceModel.ClientBase<UniqueWordsClient.ServiceReference1.ICalculator>, UniqueWordsClient.ServiceReference1.ICalculator {
+    public partial class WordCounterClient : System.ServiceModel.ClientBase<UniqueWordsClient.ServiceReference1.IWordCounter>, UniqueWordsClient.ServiceReference1.IWordCounter {
         
-        public CalculatorClient() {
+        public WordCounterClient() {
         }
         
-        public CalculatorClient(string endpointConfigurationName) : 
+        public WordCounterClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public CalculatorClient(string endpointConfigurationName, string remoteAddress) : 
+        public WordCounterClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public CalculatorClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public WordCounterClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public CalculatorClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public WordCounterClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -97,6 +103,14 @@ namespace UniqueWordsClient.ServiceReference1 {
         
         public System.Threading.Tasks.Task<double> DivideAsync(double n1, double n2) {
             return base.Channel.DivideAsync(n1, n2);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, int> GetWordCounts(string text) {
+            return base.Channel.GetWordCounts(text);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetWordCountsAsync(string text) {
+            return base.Channel.GetWordCountsAsync(text);
         }
     }
 }

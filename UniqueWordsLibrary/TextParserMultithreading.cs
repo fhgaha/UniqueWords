@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace UniqueWordsLibrary
 {
-    public class TextParserAsync
+    public class TextParserMultithreading
     {
         private ConcurrentDictionary<string, int> _wordCounts =
              new ConcurrentDictionary<string, int>(Environment.ProcessorCount, 15000);

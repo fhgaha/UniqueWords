@@ -22,12 +22,12 @@ namespace UniqueWordsHost
             Uri baseAddress = new Uri("http://localhost:8000/UniqueWords/");
 
             // Step 2: Create a ServiceHost instance.
-            ServiceHost selfHost = new ServiceHost(typeof(CalculatorService), baseAddress);
+            ServiceHost selfHost = new ServiceHost(typeof(WordCounterService), baseAddress);
 
             try
             {
                 // Step 3: Add a service endpoint.
-                selfHost.AddServiceEndpoint(typeof(ICalculator), new WSHttpBinding(), "CalculatorService");
+                selfHost.AddServiceEndpoint(typeof(IWordCounter), new WSHttpBinding(), "WordCounterService");
 
                 // Step 4: Enable metadata exchange.
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior();

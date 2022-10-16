@@ -29,7 +29,7 @@ namespace UniqueWordsServiceLibrary
     //    }
     //}
 
-    public class CalculatorService : ICalculator
+    public class WordCounterService : IWordCounter
     {
         public double Add(double n1, double n2)
         {
@@ -64,9 +64,9 @@ namespace UniqueWordsServiceLibrary
             return result;
         }
 
-        public IDictionary<string, int> BuildDictionary(string inputPath)
+        public IDictionary<string, int> GetWordCounts(string text)
         {
-            return null;
+            return new Dictionary<string, int>() { ["test"] = 20000 };
         }
     }
 }

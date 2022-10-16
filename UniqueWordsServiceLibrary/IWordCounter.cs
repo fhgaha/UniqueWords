@@ -21,7 +21,7 @@ namespace UniqueWordsServiceLibrary
     //}
 
     [ServiceContract(Namespace = "http://Microsoft.ServiceModel.Samples")]
-    public interface ICalculator
+    public interface IWordCounter
     {
         [OperationContract]
         double Add(double n1, double n2);
@@ -31,6 +31,8 @@ namespace UniqueWordsServiceLibrary
         double Multiply(double n1, double n2);
         [OperationContract]
         double Divide(double n1, double n2);
+        [OperationContract]
+        IDictionary<string, int> GetWordCounts(string text);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

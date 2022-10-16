@@ -55,6 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\ServiceReference1\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReference1\Microsoft.ServiceModel.Samples.wsdl" />
     <None Include="Connected Services\ServiceReference1\Microsoft.ServiceModel.Samples.xsd">
       <SubType>Designer</SubType>
@@ -66,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UniqueWordsLibrary\UniqueWordsLibrary.csproj">
+      <Project>{C63F37E7-072C-46D7-98B4-977BBA562548}</Project>
+      <Name>UniqueWordsLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
@@ -81,12 +90,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UniqueWordsLibrary\UniqueWordsLibrary.csproj">
-      <Project>{C63F37E7-072C-46D7-98B4-977BBA562548}</Project>
-      <Name>UniqueWordsLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

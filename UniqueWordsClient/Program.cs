@@ -43,8 +43,9 @@ namespace UniqueWordsClient
                 ReadAndWriteUsingReflection(inputPath, outputPath);
                 Console.WriteLine();
                 ReadAndWriteUsingMultiThreading(inputPath, outputPath);
-                Console.WriteLine("\n---------------------------------");
+                Console.WriteLine();
                 GetResultsFromService();
+                Console.WriteLine("\n---------------------------------");
 
                 Console.WriteLine("Press <Enter> to read and write again.");
                 Console.ReadLine();
@@ -79,7 +80,7 @@ namespace UniqueWordsClient
             Console.WriteLine("    Processing...");
             var stopwatch = Stopwatch.StartNew();
 
-            var wordCounts = new TextParserAsync().BuildDictionary(inputPath);
+            var wordCounts = new TextParserMultithreading().BuildDictionary(inputPath);
             Write(wordCounts, outputPath);
 
             stopwatch.Stop();
@@ -117,7 +118,7 @@ namespace UniqueWordsClient
             System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
 
             //Step 1: Create an instance of the WCF proxy.
-            CalculatorClient client = new CalculatorClient();
+            WordCounterClient client = new WordCounterClient();
 
             // Step 2: Call the service operations.
             // Call the Add service operation.

@@ -4,48 +4,59 @@
     <xsd:schema targetNamespace="http://Microsoft.ServiceModel.Samples/Imports">
       <xsd:import namespace="http://Microsoft.ServiceModel.Samples" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ICalculator_Add_InputMessage">
+  <wsdl:message name="IWordCounter_Add_InputMessage">
     <wsdl:part name="parameters" element="tns:Add" />
   </wsdl:message>
-  <wsdl:message name="ICalculator_Add_OutputMessage">
+  <wsdl:message name="IWordCounter_Add_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddResponse" />
   </wsdl:message>
-  <wsdl:message name="ICalculator_Subtract_InputMessage">
+  <wsdl:message name="IWordCounter_Subtract_InputMessage">
     <wsdl:part name="parameters" element="tns:Subtract" />
   </wsdl:message>
-  <wsdl:message name="ICalculator_Subtract_OutputMessage">
+  <wsdl:message name="IWordCounter_Subtract_OutputMessage">
     <wsdl:part name="parameters" element="tns:SubtractResponse" />
   </wsdl:message>
-  <wsdl:message name="ICalculator_Multiply_InputMessage">
+  <wsdl:message name="IWordCounter_Multiply_InputMessage">
     <wsdl:part name="parameters" element="tns:Multiply" />
   </wsdl:message>
-  <wsdl:message name="ICalculator_Multiply_OutputMessage">
+  <wsdl:message name="IWordCounter_Multiply_OutputMessage">
     <wsdl:part name="parameters" element="tns:MultiplyResponse" />
   </wsdl:message>
-  <wsdl:message name="ICalculator_Divide_InputMessage">
+  <wsdl:message name="IWordCounter_Divide_InputMessage">
     <wsdl:part name="parameters" element="tns:Divide" />
   </wsdl:message>
-  <wsdl:message name="ICalculator_Divide_OutputMessage">
+  <wsdl:message name="IWordCounter_Divide_OutputMessage">
     <wsdl:part name="parameters" element="tns:DivideResponse" />
   </wsdl:message>
-  <wsdl:portType name="ICalculator">
+  <wsdl:message name="IWordCounter_GetWordCounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordCounts" />
+  </wsdl:message>
+  <wsdl:message name="IWordCounter_GetWordCounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordCountsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWordCounter">
     <wsdl:operation name="Add">
-      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/ICalculator/Add" message="tns:ICalculator_Add_InputMessage" />
-      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/ICalculator/AddResponse" message="tns:ICalculator_Add_OutputMessage" />
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Add" message="tns:IWordCounter_Add_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/AddResponse" message="tns:IWordCounter_Add_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Subtract">
-      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/ICalculator/Subtract" message="tns:ICalculator_Subtract_InputMessage" />
-      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/ICalculator/SubtractResponse" message="tns:ICalculator_Subtract_OutputMessage" />
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Subtract" message="tns:IWordCounter_Subtract_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/SubtractResponse" message="tns:IWordCounter_Subtract_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Multiply">
-      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/ICalculator/Multiply" message="tns:ICalculator_Multiply_InputMessage" />
-      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/ICalculator/MultiplyResponse" message="tns:ICalculator_Multiply_OutputMessage" />
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Multiply" message="tns:IWordCounter_Multiply_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/MultiplyResponse" message="tns:IWordCounter_Multiply_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Divide">
-      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/ICalculator/Divide" message="tns:ICalculator_Divide_InputMessage" />
-      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/ICalculator/DivideResponse" message="tns:ICalculator_Divide_OutputMessage" />
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/Divide" message="tns:IWordCounter_Divide_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/DivideResponse" message="tns:IWordCounter_Divide_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWordCounts">
+      <wsdl:input wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/GetWordCounts" message="tns:IWordCounter_GetWordCounts_InputMessage" />
+      <wsdl:output wsaw:Action="http://Microsoft.ServiceModel.Samples/IWordCounter/GetWordCountsResponse" message="tns:IWordCounter_GetWordCounts_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

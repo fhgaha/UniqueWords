@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="66bf5fce-7940-45b0-892d-f3ec811ca398" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fe2b6236-d512-48f1-804b-36dc28367d9e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,13 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8000/UniqueWords/CalculatorService/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost:8000/UniqueWords/WordCounterService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Microsoft.ServiceModel.Samples.wsdl" MetadataType="Wsdl" ID="9656cf9c-d71c-400e-aca5-a52b341e49c8" SourceId="1" SourceUrl="http://localhost:8000/UniqueWords/CalculatorService/mex" />
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="b5ecfec0-c2d8-496e-87d8-c48de885e779" SourceId="1" SourceUrl="http://localhost:8000/UniqueWords/CalculatorService/mex" />
-    <MetadataFile FileName="Microsoft.ServiceModel.Samples.xsd" MetadataType="Schema" ID="731b4345-b118-4cd3-86f6-261cb14b06b7" SourceId="1" SourceUrl="http://localhost:8000/UniqueWords/CalculatorService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f6d23dc9-8368-4347-8b01-737f00929cbd" SourceId="1" SourceUrl="http://localhost:8000/UniqueWords/CalculatorService/mex" />
+    <MetadataFile FileName="Microsoft.ServiceModel.Samples.wsdl" MetadataType="Wsdl" ID="3d60f9b3-2b70-4c27-a8a9-f5d93ed2a49a" SourceId="1" SourceUrl="http://localhost:8000/UniqueWords/WordCounterService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="2748ddd7-359a-4590-a1f4-087085769538" SourceId="1" SourceUrl="http://localhost:8000/UniqueWords/WordCounterService/mex" />
+    <MetadataFile FileName="Microsoft.ServiceModel.Samples.xsd" MetadataType="Schema" ID="988df667-de38-4073-ab71-42556ed7ccdf" SourceId="1" SourceUrl="http://localhost:8000/UniqueWords/WordCounterService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="2b0aaadd-ab12-40eb-ab0e-2447458c48df" SourceId="1" SourceUrl="http://localhost:8000/UniqueWords/WordCounterService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="4fc44e49-949c-4d0c-9042-108e50651741" SourceId="1" SourceUrl="http://localhost:8000/UniqueWords/WordCounterService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
