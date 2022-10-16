@@ -22,8 +22,10 @@ namespace UniqueWordsLibrary
         {
             foreach (string word in ParseWords(line))
             {
-                var wasAdded = _wordCounts.TryAdd(word, 1);
-                if (!wasAdded) _wordCounts[word]++;
+                if (_wordCounts.ContainsKey(word)) 
+                    _wordCounts[word]++;
+                else 
+                    _wordCounts.Add(word, 1);
             }
         }
 

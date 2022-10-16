@@ -1,4 +1,13 @@
 ﻿/*
+1.
+Задание по блоку Reflection:
+Реализацию по вступительному заданию разделить на 2 сборки: exe и dll. 
+Exe читает файл, вызывает приватный метод из dll, передает ему текст из файла, получает результат и записывает его в файл. 
+Dll содержит 1 класс и приватный метод, который принимает на вход текст, возвращает Dictionary<string, int>
+Задание по блоку Reflection со звездочкой:
+при помощи рефлексии/IL вставок или любого другого механизма создать экземпляр абстрактного класса. 
+Без переопределения, без наследования. Рекомендую заглянуть на https://referencesource.microsoft.com/
+
 2.
 Задание по блоку Процессы и потоки:
 В dll предыдущего задания реализовать публичный метод аналогичный приватному, но с многопоточной обработкой текста.
@@ -66,7 +75,7 @@ namespace UniqueWords
             Console.WriteLine("    Processing...");
             var stopwatch = Stopwatch.StartNew();
 
-            var wordCounts = new TextParserFaster().BuildDictionary(inputPath);
+            var wordCounts = new TextParserAsync().BuildDictionary(inputPath);
             Write(wordCounts, outputPath);
 
             stopwatch.Stop();

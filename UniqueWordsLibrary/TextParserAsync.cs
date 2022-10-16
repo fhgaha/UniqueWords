@@ -15,25 +15,9 @@ namespace UniqueWordsLibrary
         private ConcurrentDictionary<string, int> _wordCounts =
              new ConcurrentDictionary<string, int>(Environment.ProcessorCount, 15000);
 
-        //public IDictionary<string, int> BuildDictionary(string inputPath)
-        //{
-        //    Parallel.ForEach(source: File.ReadLines(inputPath, Encoding.UTF8), body: AddWordsToDictionary);
-        //    return _wordCounts;
-        //}
-
-        //private void AddWordsToDictionary(string line)
-        //{
-        //    foreach (var word in ParseWords(line))
-        //        _wordCounts.AddOrUpdate(word, 1, (key, existingValue) => existingValue + 1);
-        //}
-
         public IDictionary<string, int> BuildDictionary(string inputPath)
         {
-            Parallel.ForEach(
-                source: File
-                    .ReadLines(inputPath, Encoding.UTF8)
-                    .SelectMany(line => ParseWords(line)),
-                body: word => _wordCounts.AddOrUpdate(word, 1, (key, existingValue) => existingValue + 1));
+            Parallel.ForEach(source: File.ReadLines(inputPath, Encoding.UTF8), body: AddWordsToDictionary);
             return _wordCounts;
         }
 
