@@ -27,70 +27,68 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using UniqueWordsClient.ServiceReference1;
-using UniqueWordsLibrary;
 
 namespace UniqueWordsClient
 {
     class Program
     {
-        private const string inputPath = @"D:\MyProjects\VS 19 projects\ConsoleApps\UniqueWords\UniqueWordsClient\WarAndPeace.txt";
-        private const string outputPath = @"D:\MyProjects\VS 19 projects\ConsoleApps\UniqueWords\UniqueWordsClient\UniqueWords.txt";
+        private const string InputPath = @"D:\MyProjects\VS 19 projects\ConsoleApps\UniqueWords\UniqueWordsClient\WarAndPeace.txt";
+        private const string OutputPath = @"D:\MyProjects\VS 19 projects\ConsoleApps\UniqueWords\UniqueWordsClient\UniqueWords.txt";
 
         static void Main(string[] args)
         {
-            //var inputPath = @"../../../UniqueWordsClient/WarAndPeace.txt";
-            //var outputPath = @"../../../UniqueWordsClient/UniqueWords.txt";
-
             while (true)
             {
-                ReadAndWriteUsingReflection(inputPath, outputPath);
-                Console.WriteLine();
-                ReadAndWriteUsingMultiThreading(inputPath, outputPath);
-                Console.WriteLine();
-                GetResultsFromService(inputPath);
-                Console.WriteLine("\n---------------------------------");
+                ReadAndWriteUsingReflection(InputPath);
+                ReadAndWriteUsingMultiThreading(InputPath);
+                GetResultsFromService(InputPath);
 
                 Console.WriteLine("Press <Enter> to read and write again.");
+                Console.WriteLine("\n---------------------------------");
                 Console.ReadLine();
             }
         }
 
-        private static void ReadAndWriteUsingReflection(string inputPath, string outputPath)
+        private static void ReadAndWriteUsingReflection(string inputPath)
         {
             Console.WriteLine("Read and write using reflection:");
             Console.WriteLine("    Processing...");
             var stopwatch = Stopwatch.StartNew();
 
             var wordAmounts = GetDictionary(inputPath);
-            Write(wordAmounts, outputPath);
+            Write(wordAmounts);
 
             stopwatch.Stop();
             Console.WriteLine($"    Done in {stopwatch.ElapsedMilliseconds} milliseconds");
+            Console.WriteLine();
         }
 
         private static Dictionary<string, int> GetDictionary(string inputPath)
         {
-            var type = typeof(TextParserUsingReflection);
+            const string libPath = @"D:\MyProjects\VS 19 projects\ConsoleApps\UniqueWords\UniqueWordsLibrary\bin\Debug\net472\UniqueWordsLibrary.dll";
+            var assembly = Assembly.LoadFrom(libPath);
+            var type = assembly.GetType("UniqueWordsLibrary.TextParserUsingReflection");
             var instance = Activator.CreateInstance(type);
             var method = type.GetMethod("BuildDictionary", BindingFlags.NonPublic | BindingFlags.Instance);
             var wordAmounts = (Dictionary<string, int>)method.Invoke(instance, new object[] { inputPath });
             return wordAmounts;
         }
 
-        private static void ReadAndWriteUsingMultiThreading(string inputPath, string outputPath)
+        private static void ReadAndWriteUsingMultiThreading(string inputPath)
         {
             Console.WriteLine("Read and write using multithreading:");
             Console.WriteLine("    Processing...");
             var stopwatch = Stopwatch.StartNew();
 
-            var wordCounts = new TextParserMultithreading().BuildDictionary(inputPath);
-            Write(wordCounts, outputPath);
+            var wordCounts = new UniqueWordsLibrary.TextParserMultithreading().BuildDictionary(inputPath);
+            Write(wordCounts);
 
             stopwatch.Stop();
             Console.WriteLine($"    Done in {stopwatch.ElapsedMilliseconds} milliseconds");
+            Console.WriteLine();
         }
 
-        private static void Write(IDictionary<string, int> wordCounts, string outputPath, int amount = 0)
+        private static void Write(IDictionary<string, int> wordCounts, int amount = 0)
         {
             if (wordCounts.Count == 0)
             {
@@ -109,7 +107,7 @@ namespace UniqueWordsClient
                     pair.Value))
                 .ToArray();
 
-            File.WriteAllLines(outputPath, amount == 0 ? output : output.Take(amount));
+            File.WriteAllLines(OutputPath, amount == 0 ? output : output.Take(amount));
         }
 
         private static void GetResultsFromService(string inputPath)
@@ -121,7 +119,7 @@ namespace UniqueWordsClient
             var stopwatch = Stopwatch.StartNew();
 
             var result = client.GetWordCountsAsync(inputPath).Result;
-            Write(result, outputPath);
+            Write(result);
 
             stopwatch.Stop();
             Console.WriteLine($"    Done in {stopwatch.ElapsedMilliseconds} milliseconds");

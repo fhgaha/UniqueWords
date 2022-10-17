@@ -71,12 +71,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UniqueWordsLibrary\UniqueWordsLibrary.csproj">
-      <Project>{C63F37E7-072C-46D7-98B4-977BBA562548}</Project>
-      <Name>UniqueWordsLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +84,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UniqueWordsLibrary\UniqueWordsLibrary.csproj">
+      <Project>{c63f37e7-072c-46d7-98b4-977bba562548}</Project>
+      <Name>UniqueWordsLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
