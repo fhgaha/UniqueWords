@@ -69,7 +69,7 @@ namespace UniqueWordsServiceLibrary
         {
             //return new Dictionary<string, int>() { ["test"] = 20000 };
          
-            return new TextParserMultithreading().BuildDictionary(inputPath);
+            return new TextParserMultiThreading().BuildDictionary(inputPath);
         }
     }
 }
