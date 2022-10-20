@@ -89,16 +89,9 @@ namespace UniqueWordsClient
 
         private static void ReadAndWriteUsingWebService()
         {
-            WordCounterClient client = new WordCounterClient();
+            var client = new WordCounterClient();
 
-            Console.WriteLine("Read and write using web service:");
-            Console.WriteLine("    Processing...");
-            var stopwatch = Stopwatch.StartNew();
-
-            DoWebService(client);
-
-            stopwatch.Stop();
-            Console.WriteLine($"    Done in {stopwatch.ElapsedMilliseconds} milliseconds");
+            ReadAndWriteUsing("web service", () => DoWebService(client));
 
             Console.WriteLine("\nPress <Enter> to terminate the client.");
             Console.ReadLine();
